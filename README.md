@@ -11,4 +11,11 @@ $ ./test.sh
 $ docker run --rm -v local-dir-absolute-path:/app/data vedo-test-local:latest python save_screenshot.py path-to-ply-file.ply path-to-output-file.png
 $example: docker run --rm -v /mnt/driveD/sources-git/3d-teeth-seg-miccai/pretrained_models/pointnet_220720_074533/evaluation/ply:/app/data vedo-test-local:latest python save_screenshot.py /app/data/decimated_01HXMTNF_lower.ply /app/data/decimated_01HXMTNF_lower.png
 ```
+
+**Run Instructions**
+```shell
+$ run.sh -i input-directory
+```
+runs the rendering command to each ply files in the input directory. The renderings are stored in the subdirectory `rendering`.
+
 for more details: https://vedo.embl.es/autodocs/content/vedo/index.html
