@@ -5,8 +5,17 @@ RUN apt-get update -y \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 RUN pip install vedo && rm -rf $(pip cache dir)
-RUN mkdir -p /app/data
 
+# create user and own directories
+RUN groupadd -r algorithm && useradd -m --no-log-init -r -g algorithm algorithm
+
+RUN mkdir -p /app /app/data \
+  && chown algorithm:algorithm /app /app/data
+
+USER algorithm
 WORKDIR /app/
-COPY test.py save_screenshot.py set_xvfb.sh /app/
+
+COPY --chown=algorithm:algorithm test.py save_screenshot.py set_xvfb.sh /app/
+
+RUN chmod a+x /app/set_xvfb.sh
 ENTRYPOINT ["/app/set_xvfb.sh"]
