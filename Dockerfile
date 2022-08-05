@@ -7,15 +7,16 @@ RUN apt-get update -y \
 RUN pip install vedo && rm -rf $(pip cache dir)
 
 # create user and own directories
-RUN groupadd -r algorithm && useradd -m --no-log-init -r -g algorithm algorithm
+# RUN groupadd -r algorithm && useradd -m --no-log-init -r -g algorithm algorithm
+RUN groupadd -r --gid 1002 hostuser
+RUN adduser --disabled-password --gecos "" --force-badname --gid 1002 hostuser
+RUN mkdir -p /app /app/data 
+RUN chown hostuser:hostuser /app /app/data
 
-RUN mkdir -p /app /app/data \
-  && chown algorithm:algorithm /app /app/data
-
-USER algorithm
+# USER algorithm
 WORKDIR /app/
 
-COPY --chown=algorithm:algorithm test.py save_screenshot.py set_xvfb.sh /app/
+COPY test.py save_screenshot.py set_xvfb.sh /app/
 
 RUN chmod a+x /app/set_xvfb.sh
 ENTRYPOINT ["/app/set_xvfb.sh"]
