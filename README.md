@@ -1,5 +1,7 @@
 # MeshVisualizer
 
+<img src="output/sample_teeth.png" data-canonical-src="output/out.png" width="150" height="150" />
+
 This repository contains script to build a docker container that can be used to perform offscreen render on a remote server.
 
 **Usecase**: projects working on mesh need a tool to visualize meshes for quick viewing without opening a dedictaed mesh viewer such as meshlab or paraview. This is difficult in a remote server like ours where a GUI may not be available.
