@@ -25,7 +25,7 @@ def plot_subject(ct_img, output_path, label_id=1, window_size=[500, 500], backgr
     affine = ct_img.affine
     affine[:3, 3] = 0
     roi_actor = marching_cubes(roi_data, affine,
-                          color=color,smoothing=smoothing)
+                          color=[c/255.0 for c in color],smoothing=smoothing)
     roi_actor.SetPosition(0, 0, 0)
     scene.add(roi_actor)
 
