@@ -177,6 +177,7 @@ if __name__ == '__main__':
     parser.add_argument('file', help='path to volume')
     parser.add_argument('--label-id', default=1, type=int)
     parser.add_argument('--size', nargs='+', type=int)
+    parser.add_argument('--color',nargs='+',type=int,default = [255, 0, 0])
     parser.add_argument('--orientation', type=str,
                         choices=['sagittal', 'coronal','axial'], default='sagittal')
     parser.add_argument('--smoothing',type=int,default=10)
@@ -191,4 +192,5 @@ if __name__ == '__main__':
     file_out = parent/f'{filestem}_{args.orientation}.png' #COLONOG-0001.nii.gz -> COLONOG-0001_sagittal.png
 
     generate_preview(ct_in, file_out, label_id=args.label_id,
-                     window_size=args.size, orientation=args.orientation,smoothing=args.smoothing,projection=args.projection)
+                     window_size=args.size, orientation=args.orientation,smoothing=args.smoothing,projection=args.projection,
+                     color= args.color)
